@@ -46,3 +46,7 @@ graph LR
 	streamlit run streamlit.py
 	```
  
+## Демо
+
+https://github.com/user-attachments/assets/ba42b4ea-043d-46b3-9689-b05f652ced55
+
