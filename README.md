@@ -1,13 +1,7 @@
 # Потоковая обработка MOCK объявлений с маркетплейсов
 Проект по "Потоковой обработке данных" СПбГУ - 2024 г.
 
-## Задачи
-
-* [ ] Создать генератор случайных объявлений
-* [ ] Создать обработчиков данных объявлений
-* [ ] Реализовать взаимодействие через Kafka
-
-## Схема проекта
+## Общая схема проекта
 
 ```mermaid
 graph LR
@@ -16,20 +10,39 @@ graph LR
 	m2[Яндекс Маркет]-->P1
 	m3[Wildberries]-->P1
 	
-	m4[Avito]-->P2
-	m5[AliExpress]-->P2
-	m6[...]-->P2
 
-  m7[...]-->P3
-  m8[...]-->P3
 
 	P1(<b>Producer #1</b>) --> Kafka
-	P2(<b>Producer #2</b>) --> Kafka
-  P3[...] --> Kafka
+
 	
 	Kafka[<b>Kafka</b>]
 	
-	Kafka <--> C1(<b>Python Consumer #1</b>)
-	Kafka <--> C2(<b>Python Consumer #2</b>)
-	Kafka <--> C3(<b>Python Consumer #3</b>) 
+	Kafka <--> Click(<b>ClickHouse</b>)
+	
+	Click-->Streamlit(<b>Streamlit</b>)
+	
+	
+	style Streamlit fill:#FF4B4B,stroke:#333,stroke-width:4px,color:#fff
+    style Click fill:#F7C600,stroke:#333,stroke-width:4px
+    style Kafka fill:#A9F0D1,stroke:#333,stroke-width:4px
+    style P1 fill:#FFF7F8,stroke:#333,stroke-width:3px
+    style m1 fill:#FFF7F8,stroke:#333,stroke-width:1px
+    style m2 fill:#FFF7F8,stroke:#333,stroke-width:1px
+    style m3 fill:#FFF7F8,stroke:#333,stroke-width:1px
 ```
+
+## Запуск
+
+1. Запускаем docker compose up
+	```bash
+	docker compose up
+	```
+2. Создаём producer:
+	```bash
+	python producer.py worker
+	```
+3. Далее запускаем Streamlit
+	```bash
+	streamlit run streamlit.py
+	```
+ 
